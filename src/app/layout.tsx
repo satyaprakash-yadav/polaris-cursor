@@ -1,6 +1,15 @@
 import type { Metadata } from "next";
 import { Inter, IBM_Plex_Mono } from "next/font/google";
 
+import {
+  ClerkProvider,
+  Show,
+  SignInButton,
+  SignUpButton,
+  UserButton,
+} from '@clerk/nextjs';
+import { dark } from "@clerk/themes";
+
 import { ThemeProvider } from "@/components/theme-provider";
 
 import "./globals.css";
@@ -39,7 +48,26 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <ClerkProvider
+            appearance={{
+              theme: dark,    // themes providers matches to the website theme
+            }}
+          >
+            <header className="flex justify-end items-center p-4 gap-4 h-16">
+                <Show when="signed-out">
+                  <SignInButton />
+                  <SignUpButton>
+                    <button className="bg-rose-500 text-white p-2 rounded">
+                      Sign Up
+                    </button>
+                  </SignUpButton>
+                </Show>
+              <Show when="signed-in">
+                <UserButton />
+              </Show>
+            </header>
+            {children}
+          </ClerkProvider>
         </ThemeProvider>
       </body>
     </html>
