@@ -1,18 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, IBM_Plex_Mono } from "next/font/google";
 
-import {
-  ClerkProvider,
-  Show,
-  SignInButton,
-  SignUpButton,
-  UserButton,
-} from '@clerk/nextjs';
-import { dark } from "@clerk/themes";
-
-import { ThemeProvider } from "@/components/theme-provider";
-
 import "./globals.css";
+
+import { Providers } from "@/components/providers";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -42,34 +33,10 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <ClerkProvider
-            appearance={{
-              theme: dark,    // themes providers matches to the website theme
-            }}
-          >
-            <header className="flex justify-end items-center p-4 gap-4 h-16">
-                <Show when="signed-out">
-                  <SignInButton />
-                  <SignUpButton>
-                    <button className="bg-rose-500 text-white p-2 rounded">
-                      Sign Up
-                    </button>
-                  </SignUpButton>
-                </Show>
-              <Show when="signed-in">
-                <UserButton />
-              </Show>
-            </header>
-            {children}
-          </ClerkProvider>
-        </ThemeProvider>
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );
-}
+};
