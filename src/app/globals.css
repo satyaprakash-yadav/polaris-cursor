@@ -118,12 +118,15 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
-    @apply bg-background text-foreground select-none;
+    @apply bg-background text-foreground;
+    /* TODO: Add 'select-none' later */
   }
 }
 
 @layer base {
+
   button:not([disabled]),
   [role="button"]:not([disabled]) {
     cursor: pointer;
@@ -131,16 +134,17 @@
 }
 
 @theme inline {
-  --animate-cell-ripple: cell-ripple var(--duration, 200ms) ease-out none 1
-    var(--delay, 0ms);
+  --animate-cell-ripple: cell-ripple var(--duration, 200ms) ease-out none 1 var(--delay, 0ms);
 
   @keyframes cell-ripple {
     0% {
       opacity: 0.4;
     }
+
     50% {
       opacity: 0.8;
     }
+
     100% {
       opacity: 0.4;
     }
