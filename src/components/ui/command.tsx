@@ -59,7 +59,9 @@ function CommandDialog({
         )}
         showCloseButton={showCloseButton}
       >
-        {children}
+        <Command className="rounded-xl! border-0 bg-transparent p-0 shadow-none">
+          {children}
+        </Command>
       </DialogContent>
     </Dialog>
   )
