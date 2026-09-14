@@ -20,7 +20,7 @@ import { ProjectsList } from "./projects-list";
 import { useCreateProject } from "../hooks/use-projects";
 import { ProjectsCommandDialog } from "./projects-command-dialog";
 
-const font = Poppins({
+export const font = Poppins({
     subsets: ["latin"],
     weight: ["400", "500", "600", "700"],
 });
