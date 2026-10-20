@@ -16,6 +16,7 @@
     "@clerk/themes": "^2.4.57",
     "@inngest/middleware-sentry": "1.0.0",
     "@mendable/firecrawl-js": "^4.39.0",
+    "@react-symbols/icons": "^1.4.1",
     "@sentry/nextjs": "10",
     "@shadcn/react": "^0.2.1",
     "ai": "^7.0.95",

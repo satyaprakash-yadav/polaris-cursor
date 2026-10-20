@@ -1,7 +1,8 @@
 import { ProjectIdLayout } from "@/features/projects/components/project-id-layout";
+import { Id } from "../../../../convex/_generated/dataModel";
 
 interface Props {
-    params: Promise<{ projectId: string }>;
+    params: Promise<{ projectId: Id<"projects"> }>;
     children: React.ReactNode;
 };
 
