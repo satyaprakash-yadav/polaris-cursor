@@ -7,6 +7,7 @@ import { FaGithub } from "react-icons/fa";
 import { Allotment } from "allotment";
 import { DEFAULT_MAIN_SIZE, DEFAULT_SIDEBAR_WIDTH, MAX_SIDEBAR_WIDTH, MIN_SIDEBAR_WIDTH } from "../constants";
 import { FileExplorer } from "./file-explorer";
+import { EditorView } from "@/features/editor/components/editor-view";
 
 interface ProjectIdViewProps {
     projectId: Id<"projects">;
@@ -78,7 +79,7 @@ export const ProjectIdView = ({
                             <FileExplorer projectId={projectId} />
                         </Allotment.Pane>
                         <Allotment.Pane>
-                            <p>Editor view</p>
+                            <EditorView projectId={projectId} />
                         </Allotment.Pane>
                     </Allotment>
                 </div>
