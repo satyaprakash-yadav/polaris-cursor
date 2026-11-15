@@ -6,7 +6,7 @@ import { CodeEditor } from "./code-editor";
 import { TopNavigation } from "./top-navigation";
 import { FileBreadcrumbs } from "./file-breadcrumbs";
 import { useFile, useUpdateFile } from "@/features/projects/hooks/use-files";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 interface EditorViewProps {
     projectId: Id<"projects">;
@@ -14,8 +14,8 @@ interface EditorViewProps {
 
 const DEBOUNCE_MS = 1500;
 
-export const EditorView = ({ 
-    projectId, 
+export const EditorView = ({
+    projectId,
 }: EditorViewProps) => {
     const { activeTabId } = useEditor(projectId);
     const activeFile = useFile(activeTabId);
@@ -24,6 +24,15 @@ export const EditorView = ({
 
     const isActiveFileBinary = activeFile && activeFile.storageId;
     const isActiveFileText = activeFile && !activeFile.storageId;
+
+    // Cleanup pending debounced updates on unmount or file change
+    useEffect(() => {
+        return () => {
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current);
+            }
+        };
+    }, [activeTabId]);
 
     return (
         <div className="h-full flex flex-col">
@@ -34,7 +43,7 @@ export const EditorView = ({
             <div className="flex-1 min-h-0 bg-background">
                 {!activeFile && (
                     <div className="size-full flex items-center justify-center">
-                        <Image 
+                        <Image
                             src="/logo-alt.svg"
                             alt="Polaris"
                             width={50}
@@ -44,9 +53,9 @@ export const EditorView = ({
                     </div>
                 )}
                 {isActiveFileText && (
-                    <CodeEditor 
+                    <CodeEditor
                         key={activeFile._id}
-                        fileName={activeFile.name} 
+                        fileName={activeFile.name}
                         initialValue={activeFile.content}
                         onChange={(content: string) => {
                             if (timeoutRef.current) {
